@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Каталог книг{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h1><a href="/books">Каталог</a></h1>
+        </div>
+        <div class="row">
+            <div class="book col-md-4">
+                <h2><a href="{{ book.pub_date|date:"Y-m-d" }}">{{ book.name }}</a></h2>
+                <p>{{ book.author }}</p>
+                <p>Дата публикации: {{ book.pub_date|date:"Y-m-d" }}</p>
+            </div>
+            <div class="book col-md-4">
+                {% if page.has_previous %}
+                    <a class="btn btn-primary" href="http://127.0.0.1:8000/books/{{ page.previous_page_number|date:"Y-m-d" }}"><{{ page.previous_page_number|date:"Y-m-d" }}   </a>
+                {% endif %}
+                <a class="btn disabled" href=''>{{ book.pub_date|date:"Y-m-d" }}</a>
+                {% if page.has_next %}
+                    <a class="btn btn-primary" href="http://127.0.0.1:8000/books/{{ page.next_page_number|date:"Y-m-d" }}">   {{ page.next_page_number|date:"Y-m-d" }}></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
