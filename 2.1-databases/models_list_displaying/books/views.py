@@ -28,7 +28,7 @@ def book_view(request, pub_date):
     }
     return render(request, template, context)
 
-
+# Не нашел что бы в пагинаторе можно было указать итерацию по датам, написал свой.
 class DatePaginator:
     def __init__(self, list_date, page_date):
         self.list_date = list_date
