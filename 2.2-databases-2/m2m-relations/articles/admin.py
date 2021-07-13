@@ -1,8 +1,22 @@
 from django.contrib import admin
 
-from .models import Article
+from .models import Article, Tag
+
+
+class ScopesInline(admin.TabularInline):
+    model = Tag.articles.through
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    inlines = [
+        ScopesInline
+    ]
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    inlines = [
+        ScopesInline
+    ]
+    exclude = ('scope_set',)
