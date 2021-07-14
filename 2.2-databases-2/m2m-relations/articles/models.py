@@ -34,10 +34,12 @@ class Scope(models.Model):
     is_main = models.BooleanField(default=False)
 
     class Meta:
+        verbose_name = 'Входимость тэга'
+        verbose_name_plural = 'Входимость тегов'
         db_table = 'articles_scope'
         constraints = [
             models.UniqueConstraint(fields=['article', str('is_main')], name='unique main tag')
         ]
 
     def __str__(self):
-        return 'Входимость тэга в статью'
+        return f'Входимость тэга "{self.tag.name}" в статью {self.article.title}'
