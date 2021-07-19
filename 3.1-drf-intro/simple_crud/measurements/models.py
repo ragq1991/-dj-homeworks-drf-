@@ -15,14 +15,22 @@ class Project(models.Model):
     )
 
 
-class Measurement(models.Model):
-    """Измерение температуры на объекте."""
+class TimestampFields(models.Model):
 
-    value = models.FloatField()
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     created_at = models.DateTimeField(
         auto_now_add=True
     )
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    class Meta:
+        abstract = True
+
+
+class Measurement(TimestampFields):
+    """Измерение температуры на объекте."""
+
+    value = models.FloatField()
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    picture = models.ImageField(blank=True, null=True)
